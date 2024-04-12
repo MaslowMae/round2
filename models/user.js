@@ -1,6 +1,6 @@
 const { Model, DataTypes } = require('sequelize');
+const sequelize = require('../config/connection');
 
-moduule.exports = (sequelize) => {
     class User extends Model {}
     User.init({
         id: {
@@ -34,9 +34,8 @@ moduule.exports = (sequelize) => {
         sequelize,
         timestamps: false,
         freezeTableName: true,
-        underscored: true,
         modelName: 'user',
     }
     );
-    return User;
-}
+
+module.exports = User;
