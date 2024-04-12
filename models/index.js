@@ -9,5 +9,13 @@ const sequelize = new Sequelize(
 )
 
 const User = require('./user');
+const Post = require('./post');
+
+User.hasMany(Post, {
+  foreignKey: "user_id",
+  onDelete: "CASCADE",
+});
 
 module.exports = {sequelize, User};
+
+module.exports = { User, Post };
