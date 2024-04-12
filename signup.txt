@@ -1,0 +1,99 @@
+To create a signup page that utilizes Handlebars, Express, bcrypt, SQL, and Sequelize, and then redirects to a profile page after successful registration, you need to set up several components: a signup form in Handlebars, a route to handle the POST request from this form, and the logic to insert a new user into the database using Sequelize and bcrypt for password hashing. Once the user is successfully created, you can set up a session for the user and redirect them to the profile page.
+
+Here's how to implement each part:
+
+Step 1: Create the Signup Form in Handlebars
+Create a signup.handlebars view with a form for the user's information:
+
+handlebars
+Copy code
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Sign Up</title>
+</head>
+<body>
+    <h1>Sign Up</h1>
+    <form action="/signup" method="POST">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" required>
+        <label for="firstName">First Name:</label>
+        <input type="text" id="firstName" name="firstName" required>
+        <label for="lastName">Last Name:</label>
+        <input type="text" id="lastName" name="lastName" required>
+        <button type="submit">Sign Up</button>
+    </form>
+</body>
+</html>
+Step 2: Setup the Express Route to Handle the Signup
+In your Express application (server.js), set up a route to handle the POST request from the signup form:
+
+javascript
+Copy code
+const bcrypt = require('bcrypt');
+const { User } = require('./models');
+
+app.post('/signup', async (req, res) => {
+    try {
+        const { email, password, firstName, lastName } = req.body;
+        const hashedPassword = await bcrypt.hash(password, 10);
+
+        const newUser = await User.create({
+            email,
+            password: hashedPassword,
+            firstName,
+            lastName
+        });
+
+        // Set up session
+        req.session.user_id = newUser.id;
+        req.session.email = newUser.email; // You can store additional info in session
+        req.session.save(() => {
+            res.redirect('/profile');
+        });
+    } catch (error) {
+        console.error('Signup Error:', error);
+        res.status(500).send('Error signing up');
+    }
+});
+Step 3: Define the Profile Route
+Ensure you have a route that renders the profile page after successful signup. This route will check if the user is logged in through the session and then render the profile page:
+
+javascript
+Copy code
+app.get('/profile', (req, res) => {
+    if (!req.session.user_id) {
+        res.redirect('/signup');
+        return;
+    }
+
+    res.render('profile', { email: req.session.email }); // Render with session email
+});
+Step 4: Include Necessary Middleware
+Ensure you have included the necessary middleware for handling sessions, parsing request bodies, etc.:
+
+javascript
+Copy code
+const session = require('express-session');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+// ...express setup
+app.use(express.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.json()); // for parsing application/json
+
+// Session setup
+app.use(session({
+    secret: 'secret', // replace with a real secret in production
+    store: new SequelizeStore({
+        db: sequelize
+    }),
+    resave: false,
+    saveUninitialized: true,
+    cookie: { secure: 'auto' }
+}));
+Step 5: Run and Test
+Run your server and test the signup process. Ensure that the database updates correctly, the session is established, and the user is redirected to the profile page.
+
+This setup should provide a functional signup page using Handlebars, Express, bcrypt, Sequelize, and SQL that redirects users to a profile page upon successful registration. Make sure you handle errors and validate user input as needed to ensure the security and reliability of your application.
