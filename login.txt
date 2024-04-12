@@ -1,0 +1,175 @@
+Creating a simple login page using Handlebars, Express, bcrypt, SQL, and Sequelize involves several steps, including setting up your project, creating the database model, handling the login logic, and setting up the views. Below is a step-by-step guide to get you started.
+
+Step 1: Project Setup
+First, initialize your project and install necessary packages:
+
+bash
+Copy code
+mkdir login-project && cd login-project
+npm init -y
+npm install express sequelize mysql2 bcrypt express-session express-handlebars
+Step 2: Setup Express and Sequelize
+Create a basic Express server in server.js:
+
+javascript
+Copy code
+const express = require('express');
+const session = require('express-session');
+const exphbs = require('express-handlebars');
+const SequelizeStore = require('connect-session-sequelize')(session.Store);
+
+const { sequelize } = require('./models'); // assuming you'll define your Sequelize models in models/index.js
+
+const app = express();
+const PORT = process.env.PORT || 3000;
+
+app.engine('handlebars', exphbs.engine());
+app.set('view engine', 'handlebars');
+
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json());
+
+// Session middleware
+app.use(session({
+  secret: 'super secret',
+  resave: false,
+  saveUninitialized: true,
+  store: new SequelizeStore({
+    db: sequelize,
+  }),
+}));
+
+// Routes would go here
+
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
+});
+Step 3: Sequelize Model for Users
+Create a Sequelize model for your users. In your project root, create a models folder, and within that folder, create index.js and user.js:
+
+models/user.js:
+
+javascript
+Copy code
+const { Model, DataTypes } = require('sequelize');
+
+module.exports = (sequelize) => {
+  class User extends Model {}
+
+  User.init({
+    email: {
+      type: DataTypes.STRING,
+      allowNull: false,
+      unique: true,
+    },
+    password: {
+      type: DataTypes.STRING,
+      allowNull: false,
+    },
+  }, {
+    sequelize,
+    modelName: 'User',
+  });
+
+  return User;
+};
+models/index.js:
+
+javascript
+Copy code
+const Sequelize = require('sequelize');
+const sequelize = new Sequelize('database', 'username', 'password', {
+  dialect: 'mysql',
+});
+
+const User = require('./user')(sequelize);
+
+module.exports = { sequelize, User };
+Replace 'database', 'username', 'password' with your actual database credentials.
+
+Step 4: Creating the Login and Profile Handlebars Views
+Create a views directory, and inside, create two files: login.handlebars and profile.handlebars.
+
+views/login.handlebars:
+
+handlebars
+Copy code
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Login</title>
+</head>
+<body>
+    <form action="/login" method="POST">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+    </form>
+</body>
+</html>
+views/profile.handlebars:
+
+handlebars
+Copy code
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Profile</title>
+</head>
+<body>
+    <h1>Welcome, {{email}}!</h1>
+</body>
+</html>
+Step 5: Handling Login Logic
+Add routes to your Express app in server.js:
+
+javascript
+Copy code
+const bcrypt = require('bcrypt');
+const { User } = require('./models');
+
+// Route to render the login page
+app.get('/', (req, res) => {
+  res.render('login');
+});
+
+// Route to handle login logic
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.findOne({ where: { email } });
+    if (!user) {
+      res.send('Incorrect email or password.');
+      return;
+    }
+
+    const validPassword = await bcrypt.compare(password, user.password);
+    if (!validPassword) {
+      res.send('Incorrect email or password.');
+      return;
+    }
+
+    req.session.user_id = user.id;
+    res.redirect('/profile');
+  } catch (err) {
+    console.error(err);
+    res.status(500).send('Internal Server Error');
+  }
+});
+
+// Route to render the profile page
+app.get('/profile', (req, res) => {
+  if (!req.session.user_id) {
+    res.redirect('/');
+    return;
+  }
+
+  res.render('profile', { email: req.session.email });
+});
+Step 6: Database Migration and Password Hashing
+Before running your application, ensure you've created the necessary database and tables. You might also need to hash the passwords of the users
+
+
+
+
+
