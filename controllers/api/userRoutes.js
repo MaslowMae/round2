@@ -40,3 +40,5 @@ router.get("/profile", (req, res) => {
 
   res.render("profile", { email: req.session.email });
 });
+
+module.exports = router;
