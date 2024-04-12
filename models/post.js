@@ -27,14 +27,6 @@ Post.init(
         key: "id",
       },
     },
-    book_id: {
-      type: DataTypes.INTEGER,
-      allowNull: true,
-      references: {
-        model: "book",
-        key: "id",
-      },
-    },
   },
   {
     sequelize,
