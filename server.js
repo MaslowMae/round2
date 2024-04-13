@@ -2,6 +2,7 @@ const express = require("express");
 const sequelize = require("./config/connection");
 const exbh = require("express-handlebars");
 const session = require("express-session");
+const sequelizeStore = require("connect-session-sequelize")(session.Store);
 const hb = exbh.create({});
 const path = require("path");
 const routes = require("./controllers");
@@ -21,6 +22,9 @@ app.use(
     secret: "Super secret secret",
     resave: false,
     saveUninitialized: true,
+    store: new sequelizeStore({
+      db: sequelize,
+    }),
   })
 );
 
