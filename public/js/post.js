@@ -1,13 +1,10 @@
 async function newPostHandler (event) {
 event.preventDefault();
     const postTitle = document.querySelector('#postTitle').value.trim();
-    console.log(postTitle);
     const postContent = document.querySelector('#postContent').value.trim();
-    console.log(postContent);
-
 
     if (postTitle && postContent) {
-      const response = await fetch('/api/posts', {
+      const response = await fetch('/posts', {
         method: 'POST',
         body: JSON.stringify({ 
           postTitle, 
@@ -17,6 +14,7 @@ event.preventDefault();
       });
       if (response.ok) {
         document.location.replace('/profile');
+        console.log(postTitle, postContent);
       } else {
         alert(response.statusText);
       }
