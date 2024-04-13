@@ -6,11 +6,13 @@
 </head>
 
 <body>
-    <form action="/login" method="POST">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
+    <form action="/profile" class="login-form">
+        <input id="email-login" type="email" name="email" placeholder="Email" required>
+        <input id="password-login" type="password" name="password" placeholder="Password" required>
         <button type="submit">Login</button>
     </form>
+
+    <script src="/public/login.js"></script>
 </body>
 
 </html>

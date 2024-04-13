@@ -22,9 +22,12 @@ router.post("/login", async (req, res) => {
       res.send("Incorrect email or password.");
       return;
     }
-
+    
     req.session.user_id = user.id;
-    res.redirect("/profile");
+    req.session.save(() => {
+      res.redirect("/profile");
+    });
+    // res.redirect("/profile");
   } catch (err) {
     console.error(err);
     res.status(500).send("Internal Server Error");
@@ -37,6 +40,8 @@ router.get("/profile", (req, res) => {
     res.redirect("/");
     return;
   }
-
-  res.render("profile", { email: req.session.email });
+//   res.render("profile", { email: req.session.email });
+  res.render("profile");
 });
+
+module.exports = router;
