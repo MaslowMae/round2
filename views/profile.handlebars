@@ -1,12 +1,44 @@
 <div class="profile-page">
-  <img class="profile-image" src="{{profileImage}}" alt="Profile Image" />
+  
   <div class="profile-details">
-    <h1>{{profileName}}</h1>
+    <h1>{{username}}</h1>
+    <p><strong>Email:</strong> {{email}}</p>
+    {{#if posts}}
+      {{#each post}}
+        <div class="post">
+          <h2>{{postTitle}}</h2>
+          <p>{{post_content}}</p>
+        </div>
+      {{/each}}
+    {{/if}}
+
+
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{{!-- 
+
     <div class="profile-info">
-      <p><strong>Email:</strong> {{profileEmail}}</p>
-      <p><strong>Location:</strong> {{profileLocation}}</p>
-      <p><strong>Joined:</strong> {{profileJoined}}</p>
-      <p><strong>Posts:</strong> {{profilePosts}}</p>
+   
+
+      <p><strong>Post Title:</strong> {{postTitle}}</p>
+      <p><strong>Post Content:</strong> {{post-content}}</p>
+
     </div>
     <div class="profile-bio">
       <p>{{profileBio}}</p>
@@ -31,7 +63,4 @@
         <a href="{{profileLinkedin}}" target="_blank"><i
             class="fab fa-linkedin-in"
           ></i></a>
-      {{/if}}
-    </div>
-  </div>
-</div>
+      {{/if}} --}}
