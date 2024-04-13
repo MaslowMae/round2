@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const { User } = require("../models");
+const { User, Post } = require("../models");
 // const withAuth = require("../utils/auth.js");
 // const axios = require('axios');
 
@@ -56,5 +56,27 @@ router.get("/signup", (req, res) => {
 router.get("/about", (req, res) => {
   res.render("about");
 });
+
+router.get("/posts", async (req, res) => {
+  res.render("post");
+});
+
+router.get("/posts/:id", async (req, res) => {
+  try {
+    const postData = await Post.findByPk(req.params.id, {
+      attributes: ["id", "postTitle", "post_content", "user_id"],
+      include: [{ model: User, attributes: ["username"] }],
+    });
+    const post = postData.get({ plain: true });
+    res.render("onePost", {
+      ...post,
+      logged_in: req.session.logged_in,
+    });
+  } catch (err) {
+    res.status(404).json({ error: "Post not found" });
+  } 
+}
+);
+    
 
 module.exports = router;
