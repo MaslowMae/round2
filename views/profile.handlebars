@@ -1,12 +1,37 @@
-<!DOCTYPE html>
-<html>
-
-<head>
-    <title>Profile</title>
-</head>
-
-<body>
-    <h1>Welcome, {{email}}!</h1>
-</body>
-
-</html>
+<div class="profile-page">
+  <img class="profile-image" src="{{profileImage}}" alt="Profile Image" />
+  <div class="profile-details">
+    <h1>{{profileName}}</h1>
+    <div class="profile-info">
+      <p><strong>Email:</strong> {{profileEmail}}</p>
+      <p><strong>Location:</strong> {{profileLocation}}</p>
+      <p><strong>Joined:</strong> {{profileJoined}}</p>
+      <p><strong>Posts:</strong> {{profilePosts}}</p>
+    </div>
+    <div class="profile-bio">
+      <p>{{profileBio}}</p>
+    </div>
+    <div class="profile-social">
+      {{#if profileTwitter}}
+        <a href="{{profileTwitter}}" target="_blank"><i
+            class="fab fa-twitter"
+          ></i></a>
+      {{/if}}
+      {{#if profileFacebook}}
+        <a href="{{profileFacebook}}" target="_blank"><i
+            class="fab fa-facebook-f"
+          ></i></a>
+      {{/if}}
+      {{#if profileInstagram}}
+        <a href="{{profileInstagram}}" target="_blank"><i
+            class="fab fa-instagram"
+          ></i></a>
+      {{/if}}
+      {{#if profileLinkedin}}
+        <a href="{{profileLinkedin}}" target="_blank"><i
+            class="fab fa-linkedin-in"
+          ></i></a>
+      {{/if}}
+    </div>
+  </div>
+</div>

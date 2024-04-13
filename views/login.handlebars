@@ -1,16 +1,28 @@
-<!DOCTYPE html>
-<html>
+<h1 style="text-align: center; font-size: 2rem; font-weight: bold;">Login</h1>
 
-<head>
-    <title>Login</title>
-</head>
+<form class="login-form">
 
-<body>
-    <form action="/login" method="POST">
-        <input type="email" name="email" placeholder="Email" required>
-        <input type="password" name="password" placeholder="Password" required>
-        <button type="submit">Login</button>
-    </form>
-</body>
+  <div>
+    <label for="username">Username</label>
+    <input type="text" id="username" name="username" required />
+  </div>
 
-</html>
+  <div>
+    <label for="email">Email</label>
+    <input type="email" id="email" name="email" required />
+  </div>
+
+  <div>
+    <label for="password">Password</label>
+    <input type="password" id="password" name="password" required />
+  </div>
+
+  <button type="submit" class="loginBtn">Login</button>
+
+  <div>
+    <p>Don't have an account? <a href="/signup">Sign up</a></p>
+  </div>
+
+</form>
+
+<script scr="./js/login.js"></script>
