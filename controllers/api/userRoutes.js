@@ -9,59 +9,48 @@ router.post("/", async (req, res) => {
       email: req.body.email,
       password: req.body.password,
     });
-    // req.session.save(() => {
-    //   req.session.user_id = newUser.id;
-    //   req.session.logged_in = true;
-    // });
+
+    req.session.save(() => {
+      req.session.id = newUser.id;
+      req.session.logged_in = true;
+    });
     res.status(200).json(newUser);
   } catch (err) {
     res.status(500).json(err);
   }
 });
-// Route to handle login logic
-// router.post("/login", async (req, res) => {
-//   try {
-//     const user = await User.findOne({ where: { email: req.body.email } });
-//     if (!user) {
-//       res.send("Incorrect email or password.");
-//       return;
-//     }
-
-//     const validPassword = user.checkPassword(req.body.password);
-
-//     if (!validPassword) {
-//       res.send("Incorrect email or password.");
-//       return;
-//     }
-//     req.session.save(() => {
-//       req.session.user_id = userData.id;
-//       req.session.logged_in = true;
-
-//       res.json({ user: userData, message: "You are now logged in!" });
-//     });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send("Internal Server Error");
-//   }
-// });
 
 // Login process route
+// Route to handle login logic
 router.post("/login", async (req, res) => {
-  const { email, password } = req.body;
+  try {
+    const userData = await User.findOne({ where: { email: req.body.email } });
 
-  // Find the user by email
-  const user = await User.findOne({ where: { email } });
+    if (!userData) {
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
+      return;
+    }
 
-  // Check if the user exists and the password is correct
-  if (!user || !(await user.checkPassword(password))) {
-    return res.redirect("/login");
+    const validPassword = await userData.checkPassword(req.body.password);
+
+    if (!validPassword) {
+      res
+        .status(400)
+        .json({ message: "Incorrect email or password, please try again" });
+      return;
+    }
+
+    req.session.save(() => {
+      req.session.user_id = userData.id;
+      req.session.logged_in = true;
+
+      res.json({ user: userData, message: "You are now logged in!" });
+    });
+  } catch (err) {
+    res.status(400).json(err);
   }
-
-  // Set the user session
-  req.session.user = user;
-  req.session.logged_in = true;
-
-  // Redirect to the homepage
 });
 
 router.post("/logout", (req, res) => {
