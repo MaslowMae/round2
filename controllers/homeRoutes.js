@@ -1,6 +1,6 @@
 const router = require("express").Router();
 const { User, Post } = require("../models");
-// const withAuth = require("../utils/auth.js");
+const withAuth = require("../utils/auth.js");
 // const axios = require('axios');
 
 // Display main page with search functionality
@@ -57,18 +57,18 @@ router.get("/about", (req, res) => {
   res.render("about");
 });
 
-router.get("/posts", async (req, res) => {
+router.get("/post", async (req, res) => {
   res.render("post");
 });
 
-router.get("/posts/:id", async (req, res) => {
+router.get("/post/:id", async (req, res) => {
   try {
     const postData = await Post.findByPk(req.params.id, {
       attributes: ["id", "postTitle", "post_content", "user_id"],
       include: [{ model: User, attributes: ["username"] }],
     });
     const post = postData.get({ plain: true });
-    res.render("onePost", {
+    res.render("profile", {
       ...post,
       logged_in: req.session.logged_in,
     });
