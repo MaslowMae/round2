@@ -1,4 +1,12 @@
-{
+[
+  {
     "postTitle": "Hello World",
-    "postContent": "This is my first post!"
-}
+    "postContent": "This is my first post!",
+    "user_id": 1
+  },
+  {
+    "postTitle": "Anne Frank",
+    "postContent": "amazing story theres no other like it i learned alot from this book!",
+    "user_id": 1
+  }
+]

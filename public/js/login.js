@@ -30,19 +30,18 @@ const loginFormHandler = async (event) => {
   event.preventDefault();
 
   // Collect values from the login form
-  const username = document.querySelector("#username").value.trim();
-  const email = document.querySelector("#email").value.trim();
-  const password = document.querySelector("#password").value.trim();
+  //   const username = document.querySelector("#username").value.trim();
+  // const username = document.querySelector("#username").value.trim();
+  const email = document.querySelector("#email").value;
+  const password = document.querySelector("#password").value;
 
-  // Logging the values to ensure they are being collected correctly
-  console.log("Login attempt with:", { username, email, password });
-
-  if (username && email && password) {
+  if (email && password) {
+    console.log(email, password);
     // Send a POST request to the API endpoint
     console.log("Sending POST request to /api/users/login");
     const response = await fetch("/api/users/login", {
       method: "POST",
-      body: JSON.stringify({ username, email, password }),
+      body: JSON.stringify({ email, password }),
       headers: { "Content-Type": "application/json" },
     });
 

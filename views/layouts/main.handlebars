@@ -18,6 +18,7 @@
   <body>
     <header>
       <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        {{#if logged_in}}
         <a class="navbar-brand" href="/"><img src="/img/bookimg.gif" id="titleimg">shelfLife</a>
         <button
           class="navbar-toggler"
@@ -30,15 +31,17 @@
         >
           <span class="navbar-toggler-icon"></span>
         </button>
+
         <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <div class="navbar-nav">
             <a class="nav-item nav-link active" href="/">Home</a>
-            {{#if logged_in}}
-              <a href="/profile"></a>
+            
+              <a class="nav-item nav-link" href="/profile">Profile</a>
               <button class="logout-btn">
                 Log Out
               </button>
             {{else}}
+                    <a class="navbar-brand" href="/"><img src="/img/bookimg.gif" id="titleimg">shelfLife</a>
 
               <a class="nav-item nav-link" href="/login">Login</a>
               <a class="nav-item nav-link" href="/signup">Sign Up</a>
@@ -69,5 +72,9 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"
     ></script>
+
+    {{#if logged_in}}
+    <script src="/js/logout.js"></script>
+    {{/if}}
   </body>
 </html>
