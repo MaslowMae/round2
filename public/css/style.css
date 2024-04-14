@@ -7,15 +7,24 @@
 .nav-link {
   font-family: "Roboto Slab", serif;
   transition: all 0.2s ease-in-out;
+  color: black;
+  border-radius: 5px;
 }
 .nav-link:hover {
-  font-size: 18px;
+  transform: translateY(-3px);
+  font-weight: bold;
+  background-color: lightgray;
+  animation: pulse 1s infinite;
 }
 #titleimg {
   animation: slideIn 0.9s;
   height: 70px;
   border-radius: 50%;
   margin-right: 5px;
+  transition: all 0.3s ease-in-out;
+}
+#titleimg:hover {
+  box-shadow: 0px 0px 10px blue;
 }
 
 /* Styles for login page */
@@ -808,4 +817,160 @@ textarea {
   100% {
     transform: rotate(360deg);
   }
+}
+.post {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+.post h3 {
+  border-bottom: lightgray 1px solid;
+  width: 90%;
+  margin-bottom: 2rem;
+}
+
+.post-title {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.comment-section {
+  border-top: 1px solid #ccc;
+  padding-top: 16px;
+  margin-top: 16px;
+}
+
+.comment-section-title {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.comment-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.comment {
+  margin-bottom: 16px;
+  overflow: auto;
+}
+
+.comment-content {
+  margin-top: 4px;
+}
+
+.comment-form {
+  display: flex;
+  flex-direction: column;
+}
+
+.comment-form-title {
+  font-size: 20px;
+  margin-bottom: 8px;
+}
+
+.comment-author-input,
+.comment-content-input {
+  margin-bottom: 8px;
+  padding: 4px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.comment-form-button {
+  padding: 8px 16px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.comment-form-button:hover {
+  background-color: #45a049;
+}
+
+.create-post {
+  border: 1px solid #ccc;
+  padding: 16px;
+  margin-bottom: 16px;
+}
+
+.create-post-title {
+  font-size: 24px;
+  margin-bottom: 8px;
+}
+
+.create-post-link {
+  display: inline-block;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.logout-btn {
+  display: inline-block;
+  padding: 8px 16px;
+  background-color: #f72828;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  text-decoration: none;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.logout-btn:hover {
+  background-color: #45a049;
+  animation: pulse 1s infinite;
+}
+
+.name {
+  background-color: #658cc6;
+  border-radius: 5px;
+  font-size: 20px;
+  font-weight: bold;
+  padding-inline: 15px;
+  padding-block: 3px;
+  color: black;
+}
+.post-form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 50%;
+  margin: 0 auto;
+  padding: 2rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.post-form label {
+  font-size: 1.2rem;
+  margin-bottom: 0.5rem;
+}
+
+.post-form input,
+.post-form textarea {
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  width: 100%;
+}
+
+.post-form button {
+  padding: 0.5rem 2rem;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+}
+
+.post-form button:hover {
+  background-color: #0062cc;
 }

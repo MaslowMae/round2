@@ -17,7 +17,6 @@ const signupFormHandler = async (event) => {
       alert(response.statusText);
     }
   }
-  console.log(username, email, password);
 };
 
 document

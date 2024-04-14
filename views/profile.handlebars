@@ -1,66 +1,38 @@
 <div class="profile-page">
-  
+
   <div class="profile-details">
-    <h1>{{username}}</h1>
-    <p><strong>Email:</strong> {{email}}</p>
-    {{#if posts}}
-      {{#each post}}
-        <div class="post">
-          <h2>{{postTitle}}</h2>
-          <p>{{post_content}}</p>
-        </div>
-      {{/each}}
-    {{/if}}
-
-
+    <h1>welcome {{user.username}}</h1>
+    <p><strong>Email:</strong> {{user.email}}</p>
   </div>
+</div>
+
+<div id="create-post" class="create-post">
+  <h2 class="create-post-title">Create a New Post</h2>
+  <a href="/post" class="create-post-link">
+  <button class="cta-button" id="postBtn">Click here to create a new post
+
+  </button>
+  </a>
 </div>
 
 
 
 
+  <div id="post-1" class="post">
+    <h3>My posts:</h3>
+    {{#each posts}}
+<span class="name">{{this.user.username}}</span>
+
+    <label class="post-title"> Book Title: {{this.postTitle}}</label>
+    <p class="post-content">{{this.postContent}}</p>
+    <button
+          class="cta-button btn-danger"
+          id="delete-btn"
+          data-id="{{this.id}}"
+        >DELETE</button>
+{{/each}}
+  </div>
+</div>
 
 
-
-
-
-
-
-
-
-
-
-
-{{!-- 
-
-    <div class="profile-info">
-   
-
-      <p><strong>Post Title:</strong> {{postTitle}}</p>
-      <p><strong>Post Content:</strong> {{post-content}}</p>
-
-    </div>
-    <div class="profile-bio">
-      <p>{{profileBio}}</p>
-    </div>
-    <div class="profile-social">
-      {{#if profileTwitter}}
-        <a href="{{profileTwitter}}" target="_blank"><i
-            class="fab fa-twitter"
-          ></i></a>
-      {{/if}}
-      {{#if profileFacebook}}
-        <a href="{{profileFacebook}}" target="_blank"><i
-            class="fab fa-facebook-f"
-          ></i></a>
-      {{/if}}
-      {{#if profileInstagram}}
-        <a href="{{profileInstagram}}" target="_blank"><i
-            class="fab fa-instagram"
-          ></i></a>
-      {{/if}}
-      {{#if profileLinkedin}}
-        <a href="{{profileLinkedin}}" target="_blank"><i
-            class="fab fa-linkedin-in"
-          ></i></a>
-      {{/if}} --}}
+<script src="./js/post.js"></script>
