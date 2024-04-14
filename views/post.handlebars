@@ -1,17 +1,19 @@
 <h1 style="text-align: center; font-size: 2rem; font-weight: bold;">Create a New Post</h1>
 
-<form class="post-form">
+<form action="/api/User/posts" class="post-form">
 
   <div>
-    <label for="postTitle">Post Title</label>
-    <textarea id="postTitle" name="postTitle"></textarea>
+    <label for="/posts">Post Title</label>
+    <input type="text" id="postTitle" name="postTitle"></input>
   </div>
 
   <div>
-    <label for="post-content">Post Content</label>
-    <textarea id="post-content" name="post-content"></textarea>
+    <label for="postContent">Post Content</label>
+    <textarea id="postContent" name="postContent"></textarea>
   </div>
 
   <button type="submit" class="postBtn">Post</button>
 
 </form>
+
+<script src="./js/post.js"></script>

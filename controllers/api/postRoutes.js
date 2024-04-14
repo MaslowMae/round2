@@ -1,13 +1,14 @@
 const router = require("express").Router();
 const { Post } = require("../../models");
-const withAuth = require("../../utils/auth");
+// const withAuth = require("../../utils/auth");
 
-router.post('/', withAuth, async (req, res) => {
+//****removed withauth for now */
+router.post('/posts', async (req, res) => {
   try {
     const newPost = await Post.create({
       postTitle: req.body.postTitle,
-      post_content: req.body.post_content,
-      // user_id: req.session.user_id,
+      postContent: req.body.postContent,
+      user_id: req.session.user_id,
     });
     res.status(200).json(newPost);
     console.log(newPost);
@@ -16,12 +17,14 @@ router.post('/', withAuth, async (req, res) => {
   }
 });
 
-router.put('/:id', withAuth, async (req, res) => {
+console.log("Post routes");
+
+router.put('/:id', async (req, res) => {
   try {
     const updatedPost = await Post.update(
       {
         postTitle: req.body.postTitle,
-        post_content: req.body.post_content,
+        postContent: req.body.postContent,
       },
       {
         where: {
@@ -39,7 +42,7 @@ router.put('/:id', withAuth, async (req, res) => {
   }
 }  );
 
-router.delete('/:id', withAuth, async (req, res) => {
+router.delete('/:id', async (req, res) => {
   try {
     const deletedPost = await Post.destroy({
       where: {
