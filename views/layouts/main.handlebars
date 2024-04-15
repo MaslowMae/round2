@@ -40,6 +40,10 @@
               <button class="logout-btn">
                 Log Out
               </button>
+              <div class="delete">            
+                  <button class="btn btn-danger btn-lg" id="deleteAcc" title="Delete account?" data-id="{{id}}">Delete account?</button>
+              </div>
+              
             {{else}}
                     <a class="navbar-brand" href="/"><img src="/img/bookimg.gif" id="titleimg">shelfLife</a>
 
@@ -75,6 +79,8 @@
 
     {{#if logged_in}}
     <script src="/js/logout.js"></script>
+        <script src="/js/delAccount.js"></script>
+
     {{/if}}
   </body>
 </html>
