@@ -1,4 +1,3 @@
-
 const newPostHandler = async (event) => {
   event.preventDefault();
   const postTitle = document.querySelector("#postTitle").value.trim();
@@ -17,7 +16,7 @@ const newPostHandler = async (event) => {
       document.location.replace("/profile");
     } else {
       alert(response.statusText);
-
+    }}
 async function newPostHandler (event) {
 event.preventDefault();
     const postTitle = document.querySelector('#postTitle').value.trim();
