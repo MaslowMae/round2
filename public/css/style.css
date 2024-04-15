@@ -499,6 +499,12 @@
   font-size: 1.5rem;
 }
 
+.delete {
+  margin-left: 10px;
+  border-left: grey solid 1px;
+  padding-left: 10px;
+}
+
 #btn {
   background-color: #13f6ba;
   border: none;

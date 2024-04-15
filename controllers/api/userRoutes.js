@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const { User } = require("../../models");
+const withAuth = require("../../utils/auth");
 
 // Route to render the login page
 router.post("/", async (req, res) => {
@@ -19,7 +20,23 @@ router.post("/", async (req, res) => {
     res.status(500).json(err);
   }
 });
-
+router.delete("/:id", withAuth, async (req, res) => {
+  try {
+    const deletedUser = await User.findByPk(req.destroy.id, {
+      where: {
+        id: req.params.id,
+        user_id: req.session.user_id,
+      },
+    });
+    if (!deletedUser) {
+      res.status(404).json({ message: "No user found with this id!" });
+      return;
+    }
+    res.status(200).json(deletedUser);
+  } catch (err) {
+    res.status(500).json(err);
+  }
+});
 // Login process route
 // Route to handle login logic
 router.post("/login", async (req, res) => {
