@@ -1,6 +1,5 @@
 const router = require("express").Router();
 const { User, Post } = require("../models");
-const { findAll } = require("../models/user.js");
 const withAuth = require("../utils/auth.js");
 
 // Display main page with search functionality
