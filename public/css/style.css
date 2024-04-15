@@ -84,18 +84,42 @@
 }
 
 /* Styles for homepage */
-
+#homepage {
+  padding: 20px;
+  border-radius: 10px;
+  background-image: url(https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS3le-gnWkVs2Ln6mNsxfDb409LIrMT3Zozpg&s);
+  background-position: right;
+  background-repeat: no-repeat;
+  background-size: contain;
+  border-top-left-radius: 50%;
+  border-bottom-left-radius: 50%;
+  background-blend-mode: darken;
+  box-shadow: 0px 0px 10px black, 0px 0px 20px rgb(0, 229, 255),
+    0px 0pc 30px cyan, 0px 0px 20px black, 0px 0px 40px cyan;
+  transition: all 0.3s ease-in-out;
+}
+#homepage:hover {
+  box-shadow: 0px 0px 20px rgb(0, 81, 255), 0px 0px 30px cyan,
+    0px 0px 20px rgb(0, 229, 255), 0px 0px 40px rgb(0, 0, 0),
+    0px 0px 50px rgb(0, 229, 255);
+}
 .advanced-homepage {
   background-color: #f5f5f5;
   padding: 2rem;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* added box shadow */
 }
 
-.homepage-hero {
-  text-align: center;
-  animation: slideIn 1s ease-out; /* added slide in animation */
+@keyframes move {
+  0% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(50px);
+  }
+  100% {
+    transform: translateX(0);
+  }
 }
-
 @keyframes slideIn {
   from {
     transform: translateY(-20px);
@@ -127,7 +151,8 @@
 .cool-font {
   font-family: "Pacifico", cursive;
   animation: bounceIn 2s ease-in-out;
-  color: #007bff;
+  color: black;
+  text-shadow: 0px 0px 10px white;
   transition: all 0.3s ease-in-out;
 }
 
@@ -171,21 +196,6 @@
   }
 }
 
-.homepage-hero p {
-  font-size: 1.2rem;
-  color: #666;
-}
-
-.homepage-features {
-  display: flex;
-  justify-content: space-between;
-  margin: 4rem 0;
-  line-height: 150%;
-}
-.homepage-features h2 {
-  font-family: "Pacifico", cursive;
-  color: rgb(0, 149, 255);
-}
 .feature {
   text-align: center;
   width: 30%;
@@ -209,23 +219,30 @@
 .feature h2 {
   font-size: 1.5rem;
   margin-bottom: 0.5rem;
+  color: rgb(255, 255, 255);
 }
 
 .call-to-action {
   text-align: center;
   margin: 2rem 0;
+  border-radius: 5px;
+  padding-block: 5px;
+  font-family: "Roboto Slab", serif;
+  animation: bounceIn 1s ease-out;
 }
 
 .call-to-action h3 {
   font-size: 2rem;
   margin-bottom: 1rem;
+  color: black;
+  text-shadow: 2px 0px 10px white;
 }
 
 .call-to-action button {
   padding: 1rem 2rem;
   border: none;
   background-color: #009578;
-  color: #fff;
+  font-weight: bolder;
   border-radius: 5px;
   cursor: pointer;
   transition: all 0.3s ease-in-out;
@@ -233,19 +250,35 @@
   animation: pulse 2s infinite;
 }
 
-.call-to-action button:hover {
-  background-color: #00685d;
-  box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.5); /* increased box shadow on hover */
-}
-*/
-
 /* homepage.handlebars */
-
+.homepage-hero p {
+  font-size: 1.2rem;
+  color: #000000;
+  text-shadow: 0px 0px 10px white;
+  font-weight: bold;
+}
 .homepage-hero {
-  background-color: #f5f5f5;
-  animation: slideIn 1s ease-out;
+  text-align: center;
+  animation: slideIn 1s ease-out; /* added slide in animation */
+}
+.homepage-features {
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem 0;
+  line-height: 150%;
+  background-color: rgba(255, 255, 255, 0.5);
+  animation: fadeIn 2s ease-in;
+  position: relative;
+}
+.homepage-features h2 {
+  font-family: "Pacifico", cursive;
+  color: rgb(0, 0, 0);
 }
 
+.homepage-features * {
+  font-weight: bolder;
+  color: black;
+}
 @keyframes slideIn {
   from {
     transform: translateY(-100%);
@@ -255,11 +288,6 @@
   }
 }
 
-.homepage-features {
-  background-color: #fff;
-  animation: fadeIn 2s ease-in;
-}
-
 @keyframes fadeIn {
   from {
     opacity: 0;
@@ -267,11 +295,6 @@
   to {
     opacity: 1;
   }
-}
-
-.call-to-action {
-  background-color: #ececec;
-  animation: bounceIn 1s ease-out;
 }
 
 @keyframes bounceIn {
@@ -474,40 +497,6 @@
 
 .profile-social a i {
   font-size: 1.5rem;
-}
-
-/* styles for books */
-
-.book-container {
-  display: inline-flex;
-  margin-bottom: 2rem;
-}
-
-.book-description {
-  display: block;
-  margin-bottom: 2rem;
-}
-.book-description a {
-  margin-left: 10px;
-  transition: all 0.3s ease-in-out;
-}
-.book-description a:hover {
-  color: black;
-}
-.book-description img {
-  width: 10%;
-  border-radius: 4px;
-  margin-left: 1rem;
-}
-
-.book-description p {
-  margin: auto 5px;
-}
-
-.bookTitle {
-  font-family: "Pacifico", cursive;
-  margin: 5px;
-  font-size: 28px;
 }
 
 #btn {
@@ -818,6 +807,7 @@ textarea {
     transform: rotate(360deg);
   }
 }
+
 .post {
   border: 1px solid #ccc;
   padding: 16px;

@@ -29,6 +29,7 @@
 const loginFormHandler = async (event) => {
   event.preventDefault();
 
+  const invalid = document.getElementById("invalid");
   // Collect values from the login form
   //   const username = document.querySelector("#username").value.trim();
   // const username = document.querySelector("#username").value.trim();
@@ -53,8 +54,11 @@ const loginFormHandler = async (event) => {
       // If successful, redirect the browser to the profile page
       document.location.replace("/profile");
     } else {
-      console.log("Login failed, server responded with:", response.statusText);
-      alert(response.statusText);
+      invalid.textContent = "incorrect email or password";
+      invalid.setAttribute(
+        "style",
+        "color: red; font-weight:bolder; margin-left:25%;"
+      );
     }
   } else {
     console.log("Missing username, email, or password.");
